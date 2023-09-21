@@ -1,0 +1,47 @@
+
+set(LIB_CURRENT_MODULE_NAME "Add")
+
+# Sources
+file(GLOB SRCS_G "src/*.cpp")
+POCO_SOURCES_AUTO(SRCS ${SRCS_G})
+
+# Headers
+file(GLOB_RECURSE HDRS_G "include/*.h")
+POCO_HEADERS_AUTO(SRCS ${HDRS_G})
+#POCO_SOURCES(SRCS pdjson src/pdjson.c)
+
+# Version Resource
+if(MSVC AND BUILD_SHARED_LIBS)
+    source_group("Resources" FILES ${PROJECT_SOURCE_DIR}/DLLVersion.rc)
+    list(APPEND SRCS ${PROJECT_SOURCE_DIR}/DLLVersion.rc)
+endif()
+
+add_library(${LIB_CURRENT_MODULE_NAME} ${SRCS})
+add_library(${PROJECT_MODULE_EXPORT_NAMESPACE}${LIB_CURRENT_MODULE_NAME} ALIAS ${LIB_CURRENT_MODULE_NAME})
+set_target_properties(${LIB_CURRENT_MODULE_NAME}
+        PROPERTIES
+#        VERSION ${SHARED_LIBRARY_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
+        OUTPUT_NAME ${PROJECT_NAME}${LIB_CURRENT_MODULE_NAME}
+        DEFINE_SYMBOL ${PROJECT_NAME}_EXPORTS
+)
+
+target_include_directories(${LIB_CURRENT_MODULE_NAME}
+        PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+        PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+if(WIN32)
+    target_compile_definitions(${LIB_CURRENT_MODULE_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
+else()
+
+endif()
+
+POCO_INSTALL(${LIB_CURRENT_MODULE_NAME})
+POCO_GENERATE_PACKAGE(${LIB_CURRENT_MODULE_NAME})
+
+if(ENABLE_TESTS)
+    add_subdirectory(samples)
+    add_subdirectory(tests)
+endif()
