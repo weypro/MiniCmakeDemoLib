@@ -1,0 +1,9 @@
+#ifndef MINICMAKEDEMOLIB_CORE_H
+#define MINICMAKEDEMOLIB_CORE_H
+
+#include "coreexport.h"
+
+
+MINICMAKEDEMOLIB_API_EXPORT int core_test();
+
+#endif //MINICMAKEDEMOLIB_LIBRARY_H

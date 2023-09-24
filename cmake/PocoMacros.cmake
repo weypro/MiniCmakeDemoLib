@@ -58,7 +58,7 @@ endif(WIN32)
 #           out             the variable the sources are added to
 #           name:           the name of the components
 #           platform:       the platform this sources are for (ON = All, OFF = None, WIN32, UNIX ...)
-#           sources:        a list of files to add to ${out}
+#           sources:        a list of files to Add to ${out}
 #    Example: POCO_SOURCES_PLAT( SRCS Foundation ON src/Foundation.cpp )
 #
 #  POCO_SOURCES - Like POCO_SOURCES_PLAT with platform = ON (Built on all platforms)
@@ -79,7 +79,7 @@ endif(WIN32)
 #      INPUT:
 #           out             the variable the headers are added to
 #           name:           the name of the components
-#           headers:        a list of files to add to HDRSt
+#           headers:        a list of files to Add to HDRSt
 #    Example: POCO_HEADERS( HDRS Foundation include/Poco/Foundation.h )
 #
 #  POCO_HEADERS_AUTO - Like POCO_HEADERS but the name is read from the file header // Package: X
@@ -94,7 +94,7 @@ endif(WIN32)
 #      INPUT:
 #           out             the variable the message and the resulting headers are added to
 #           name:           the name of the components
-#           messages:       a list of files to add to MSGS
+#           messages:       a list of files to Add to MSGS
 #    Example: POCO_MESSAGES( HDRS Foundation include/Poco/Foundation.mc )
 #
 
@@ -222,7 +222,7 @@ else()
 		NAMESPACE "${PROJECT_NAME}::"
     )
 endif()
-configure_file("cmake/Poco${target_name}Config.cmake"
+configure_file("cmake/${PROJECT_NAME}${target_name}Config.cmake"
 	"${CMAKE_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}${target_name}Config.cmake"
 	@ONLY
 )
@@ -263,7 +263,7 @@ endmacro()
 #    Example: POCO_INSTALL(Foundation)
 macro(POCO_INSTALL target_name)
 install(
-    DIRECTORY include/Poco
+    DIRECTORY "include/${PROJECT_NAME}"
     DESTINATION include
     COMPONENT Devel
     PATTERN ".svn" EXCLUDE

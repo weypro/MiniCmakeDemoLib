@@ -138,6 +138,7 @@ pocomsg.h
 .cproject
 .settings
 cmake-build/
+build
 
 # Temporary files #
 ###################
@@ -151,3 +152,5 @@ releases/
 *.swp
 *.vim
 tags
+
+.cache

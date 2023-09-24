@@ -1,0 +1,8 @@
+#ifndef MINICMAKEDEMOLIB_ADD_H
+#define MINICMAKEDEMOLIB_ADD_H
+
+#include "MiniCmakeDemoLib/core/library.h"
+
+MINICMAKEDEMOLIB_API_EXPORT int hello();
+
+#endif //MINICMAKEDEMOLIB_LIBRARY_H
