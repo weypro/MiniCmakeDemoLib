@@ -11,10 +11,10 @@ POCO_HEADERS_AUTO(SRCS ${HDRS_G})
 #POCO_SOURCES(SRCS pdjson src/pdjson.c)
 
 
-if(WIN32 AND BUILD_SHARED_LIBS)
-    source_group("Resources" FILES "${CMAKE_BINARY_DIR}/DLLVersion.rc")
-    list(APPEND SRCS "${CMAKE_BINARY_DIR}/DLLVersion.rc")
-endif()
+#if(WIN32 AND BUILD_SHARED_LIBS)
+#    source_group("Resources" FILES "${CMAKE_BINARY_DIR}/DLLVersion.rc")
+#    list(APPEND SRCS "${CMAKE_BINARY_DIR}/DLLVersion.rc")
+#endif()
 
 add_library(${LIB_CURRENT_MODULE_NAME} ${SRCS})
 add_library("${PROJECT_MODULE_EXPORT_NAMESPACE}${LIB_CURRENT_MODULE_NAME}" ALIAS ${LIB_CURRENT_MODULE_NAME})

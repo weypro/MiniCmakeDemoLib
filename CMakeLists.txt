@@ -54,10 +54,10 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach(OUTPUTCONFIG)
 
 
-configure_file(
-        "${PROJECT_SOURCE_DIR}/DLLVersion.rc"
-        "${CMAKE_BINARY_DIR}/DLLVersion.rc"
-        IMMEDIATE @ONLY)
+#configure_file(
+#        "${PROJECT_SOURCE_DIR}/DLLVersion.rc"
+#        "${CMAKE_BINARY_DIR}/DLLVersion.rc"
+#        IMMEDIATE @ONLY)
 
 
 # Append our module directory to CMake
@@ -165,13 +165,14 @@ write_basic_package_version_file(
 # Set config script install location in a location that find_package() will
 # look for, which is different on MS Windows than for UNIX
 # Note: also set in POCO_GENERATE_PACKAGE macro in cmake/PocoMacros.cmake
-if(WIN32)
-    set(PocoConfigPackageLocation "cmake")
-else()
-    set(PocoConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-endif()
+#if(WIN32)
+#    set(PocoConfigPackageLocation "cmake")
+#else()
+#    set(PocoConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+#endif()
+set(PocoConfigPackageLocation "${CMAKE_INSTALL_PREFIX}/cmake/${PROJECT_NAME}")
 
-configure_file(cmake/${PROJECT_NAME}Config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake" @ONLY)
+configure_file(cmake/${PROJECT_NAME}Config.cmake.in "${PocoConfigPackageLocation}/${PROJECT_NAME}Config.cmake" @ONLY)
 install(
         FILES
         ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
@@ -182,12 +183,12 @@ install(
         Devel
 )
 
-mark_as_advanced(
-        gtest_force_shared_crt
-        gtest_build_tests
-        gtest_build_samples
-        gtest_disable_pthreads
-        gtest_hide_internal_symbols)
+#mark_as_advanced(
+#        gtest_force_shared_crt
+#        gtest_build_tests
+#        gtest_build_samples
+#        gtest_disable_pthreads
+#        gtest_hide_internal_symbols)
 
 message(STATUS "CMake ${CMAKE_VERSION} successfully configured ${PROJECT_NAME} using ${CMAKE_GENERATOR} generator")
 message(STATUS "${PROJECT_NAME} package version: ${PROJECT_VERSION}")

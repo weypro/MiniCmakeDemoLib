@@ -230,11 +230,12 @@ configure_file("cmake/${PROJECT_NAME}${target_name}Config.cmake"
 # Set config script install location in a location that find_package() will
 # look for, which is different on MS Windows than for UNIX
 # Note: also set in root CMakeLists.txt
-if(WIN32)
-	set(PocoConfigPackageLocation "cmake")
-else()
-	set(PocoConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-endif()
+#if(WIN32)
+#	set(PocoConfigPackageLocation "cmake")
+#else()
+#	set(PocoConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+#endif()
+set(PocoConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
 
 install(
     EXPORT "${target_name}Targets"
